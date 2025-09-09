@@ -1,6 +1,3 @@
-let humanScore = 0;
-let computerScore = 0;
-
 function getComputerChoice() {
     /* Pseudo code
     GENERATE a random number between 1-3
@@ -31,35 +28,44 @@ function getHumanChoice() {
     return getHandSignal(userChoice);
 }
 
-function playRound(humanChoice, computerChoice) {
-    let winner = "";
-    
-    if ((humanChoice === "rock" && computerChoice === "scissors")
-        || (humanChoice === "paper" && computerChoice === "rock")
-        || (humanChoice === "scissors" && computerChoice === "paper")
-    ) {
-        winner = "human";
-    } else if ((humanChoice === "rock" && computerChoice === "paper")
-        || (humanChoice === "paper" && computerChoice === "scissors")
-        || (humanChoice === "scissors" && computerChoice === "rock")
-    ) {
+function playGame() {
+    let humanScore = 0;
+    let computerScore = 0;
+
+    function playRound(humanChoice, computerChoice) {
+        let winner = "";
+        
+        if ((humanChoice === "rock" && computerChoice === "scissors")
+            || (humanChoice === "paper" && computerChoice === "rock")
+            || (humanChoice === "scissors" && computerChoice === "paper")
+        ) {
+            winner = "human";
+        } else if ((humanChoice === "rock" && computerChoice === "paper")
+            || (humanChoice === "paper" && computerChoice === "scissors")
+            || (humanChoice === "scissors" && computerChoice === "rock")
+        ) {
             winner = "computer";
-    } else {
-        winner = "draw";
+        } else {
+            winner = "draw";
+        }
+    
+        if (winner === "human") {
+            console.log(`You win! ${humanChoice} beats ${computerChoice}`);
+            humanScore++;
+        } else if (winner === "computer") {
+            console.log(`You lose! ${humanChoice} loses to ${computerChoice}`);
+            computerScore++;
+        } else {
+            console.log(`It's a draw! Both combatants chose ${humanChoice}.`);
+        }        
     }
 
-    if (winner === "human") {
-        console.log(`You win! ${humanChoice} beats ${computerChoice}`);
-        humanScore++;
-    } else if (winner === "computer") {
-        console.log(`You lose! ${humanChoice} loses to ${computerChoice}`);
-        computerScore++;
-    } else {
-        console.log(`It's a draw! Both combatants chose ${humanChoice}.`);
+    for (let i = 0; i < 5; i++) {
+        playRound(getHumanChoice(), getComputerChoice());
     }
+
+    console.log(`The final result is:`);
+    console.log(`Human: ${humanScore}, Computer: ${computerScore}`);
 }
 
-const humanSelection = getHumanChoice();
-const computerSelection = getComputerChoice();
-
-playRound(humanSelection, computerSelection);
+playGame();
