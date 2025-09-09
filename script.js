@@ -30,3 +30,36 @@ function getHumanChoice() {
     let userChoice = prompt("Choose a hand signal. Type 'r' for rock, 'p' for paper or 's' for scissors");
     return getHandSignal(userChoice);
 }
+
+function playRound(humanChoice, computerChoice) {
+    let winner = "";
+    
+    if ((humanChoice === "rock" && computerChoice === "scissors")
+        || (humanChoice === "paper" && computerChoice === "rock")
+        || (humanChoice === "scissors" && computerChoice === "paper")
+    ) {
+        winner = "human";
+    } else if ((humanChoice === "rock" && computerChoice === "paper")
+        || (humanChoice === "paper" && computerChoice === "scissors")
+        || (humanChoice === "scissors" && computerChoice === "rock")
+    ) {
+            winner = "computer";
+    } else {
+        winner = "draw";
+    }
+
+    if (winner === "human") {
+        console.log(`You win! ${humanChoice} beats ${computerChoice}`);
+        humanScore++;
+    } else if (winner === "computer") {
+        console.log(`You lose! ${humanChoice} loses to ${computerChoice}`);
+        computerScore++;
+    } else {
+        console.log(`It's a draw! Both combatants chose ${humanChoice}.`);
+    }
+}
+
+const humanSelection = getHumanChoice();
+const computerSelection = getComputerChoice();
+
+playRound(humanSelection, computerSelection);
