@@ -17,12 +17,16 @@ function getRandomValue(lowest, highest) {
     return Math.floor(Math.random() * highest) + lowest;
 }
 
-function getHandSignal(num) {
-    if (typeof num !== "number") throw TypeError("Arg <num> must be a number");
-
-    if (num === 1) return "rock";
-    else if (num === 2) return "paper";
-    else if (num === 3) return "scissors";
+function getHandSignal(token) {
+    if (token === 1 || token === "r") return "rock";
+    else if (token === 2 || token === "p") return "paper";
+    else if (token === 3 || token === "s") return "scissors";
 }
 
-console.log(getComputerChoice());
+function getHumanChoice() {
+    let userChoice = prompt("Choose a hand signal. Type 'r' for rock, 'p' for paper or 's' for scissors");
+    return getHandSignal(userChoice);
+}
+
+console.log("human choice", getHumanChoice());
+console.log("computer choice", getComputerChoice());
