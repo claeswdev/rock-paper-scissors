@@ -1,3 +1,6 @@
+let humanScore = 0;
+let computerScore = 0;
+
 function getComputerChoice() {
     /* Pseudo code
     GENERATE a random number between 1-3
@@ -27,6 +30,3 @@ function getHumanChoice() {
     let userChoice = prompt("Choose a hand signal. Type 'r' for rock, 'p' for paper or 's' for scissors");
     return getHandSignal(userChoice);
 }
-
-console.log("human choice", getHumanChoice());
-console.log("computer choice", getComputerChoice());
