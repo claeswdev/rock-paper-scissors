@@ -1,3 +1,39 @@
+let humanSelection = "";
+let computerSelection = "";
+let humanScore = 0;
+let computerScore = 0;
+
+const rockButton = document.createElement("button");
+const paperButton = document.createElement("button");
+const scissorsButton = document.createElement("button");
+const container = document.querySelector(".container");
+container.append(rockButton, paperButton, scissorsButton);
+
+const resultDiv = document.createElement("div");
+container.appendChild(resultDiv)
+
+rockButton.textContent = "Rock";
+paperButton.textContent = "Paper";
+scissorsButton.textContent = "Scissors";
+
+rockButton.addEventListener("click", () => {
+    humanSelection = getHandSignal(1);
+    computerSelection = getComputerChoice();
+    playRound(humanSelection, computerSelection);
+});
+
+paperButton.addEventListener("click", () => {
+    humanSelection = getHandSignal(2);
+    computerSelection = getComputerChoice();
+    playRound(humanSelection, computerSelection);
+});
+
+scissorsButton.addEventListener("click", () => {
+    humanSelection = getHandSignal(3);
+    computerSelection = getComputerChoice();
+    playRound(humanSelection, computerSelection);
+});
+
 function getComputerChoice() {
     /* Pseudo code
     GENERATE a random number between 1-3
@@ -28,44 +64,31 @@ function getHumanChoice() {
     return getHandSignal(userChoice);
 }
 
-function playGame() {
-    let humanScore = 0;
-    let computerScore = 0;
-
-    function playRound(humanChoice, computerChoice) {
-        let winner = "";
-        
-        if ((humanChoice === "rock" && computerChoice === "scissors")
-            || (humanChoice === "paper" && computerChoice === "rock")
-            || (humanChoice === "scissors" && computerChoice === "paper")
-        ) {
-            winner = "human";
-        } else if ((humanChoice === "rock" && computerChoice === "paper")
-            || (humanChoice === "paper" && computerChoice === "scissors")
-            || (humanChoice === "scissors" && computerChoice === "rock")
-        ) {
-            winner = "computer";
-        } else {
-            winner = "draw";
-        }
+function playRound(humanChoice, computerChoice) {
+    let winner = "";
     
-        if (winner === "human") {
-            console.log(`You win! ${humanChoice} beats ${computerChoice}`);
-            humanScore++;
-        } else if (winner === "computer") {
-            console.log(`You lose! ${humanChoice} loses to ${computerChoice}`);
-            computerScore++;
-        } else {
-            console.log(`It's a draw! Both combatants chose ${humanChoice}.`);
-        }        
+    if ((humanChoice === "rock" && computerChoice === "scissors")
+        || (humanChoice === "paper" && computerChoice === "rock")
+        || (humanChoice === "scissors" && computerChoice === "paper")
+    ) {
+        winner = "human";
+    } else if ((humanChoice === "rock" && computerChoice === "paper")
+        || (humanChoice === "paper" && computerChoice === "scissors")
+        || (humanChoice === "scissors" && computerChoice === "rock")
+    ) {
+        winner = "computer";
+    } else {
+        winner = "draw";
     }
 
-    for (let i = 0; i < 5; i++) {
-        playRound(getHumanChoice(), getComputerChoice());
-    }
-
-    console.log(`The final result is:`);
-    console.log(`Human: ${humanScore}, Computer: ${computerScore}`);
+    if (winner === "human") {
+        resultDiv.textContent = `You win! ${humanChoice} beats ${computerChoice}.`;
+        resultDiv.textContent += ` Current standing is You: ${++humanScore}, Computer: ${computerScore}`;
+    } else if (winner === "computer") {
+        resultDiv.textContent = `You lose! ${computerChoice} beats ${humanChoice}.`;
+        resultDiv.textContent += ` Current standing is You: ${humanScore}, Computer: ${++computerScore}`;
+    } else {
+        resultDiv.textContent = `It's a draw! Both combatants chose ${humanChoice}.`;
+        resultDiv.textContent += ` Current standing is You: ${humanScore}, Computer: ${computerScore}`;
+    }        
 }
-
-playGame();
