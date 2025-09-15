@@ -91,4 +91,8 @@ function playRound(humanChoice, computerChoice) {
         resultDiv.textContent = `It's a draw! Both combatants chose ${humanChoice}.`;
         resultDiv.textContent += ` Current standing is You: ${humanScore}, Computer: ${computerScore}`;
     }        
+
+    if (humanScore >= 5 || computerScore >= 5) {
+        resultDiv.textContent += ` Game over! Winner is ${humanScore >= 5 ? "human" : "computer"}!`;
+    }
 }
